@@ -7,9 +7,19 @@ var fs = require('fs')
    ,request = require('request')
    ,AWS = require('aws-sdk')
    ,nconf = require('nconf').file({file:__dirname + '/config.json'})
+   ,argv = require('optimist')
+        .demand(['payload'])
+        .argv
 //   ,inspect = require('eyes').inspector({maxLength: false})
 
-AWS.config.update({region: 'us-east-1'})
+fs.readFile(argv.payload, 'ascii', function(err, payload) {
+    var awsKey = JSON.parse(payload)
+    AWS.config.update({
+        accessKeyId: awsKey.access,
+        secretAccessKey:awsKey.secretaccess,
+        region: awsKey.region
+    })
+})
 
 var parser = new xml2js.Parser({
     trim: true,
