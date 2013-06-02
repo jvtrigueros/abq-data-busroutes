@@ -48,8 +48,6 @@ function kml2json(kmlString, callback) {
 
             jsonRoute.push(currentRoute)
         })
-//        console.log(jsonRoute)
-//        fs.writeFile('test/allroutes.json',JSON.stringify(jsonRoute,null,2))
         callback(JSON.stringify(jsonRoute,null,2))
     })
 }
@@ -59,7 +57,7 @@ function kml2json(kmlString, callback) {
 //  kml2json(kmlString, console.log)
 //})
 
-//http.get("http://data.cabq.gov/transit/realtime/route/allroutes.kml", function(response) {
+//request("http://data.cabq.gov/transit/realtime/route/allroutes.kml", function(err,res,body) {
 request('http://dl.dropboxusercontent.com/u/189610/allroutes.kml', function(err,res,body) {
     kml2json(body, console.log)
 })
