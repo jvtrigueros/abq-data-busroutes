@@ -9,7 +9,8 @@ var fs = require('fs')
    ,nconf = require('nconf').file({file:__dirname + '/config.json'})
 //   ,inspect = require('eyes').inspector({maxLength: false})
 
-AWS.config.loadFromPath('aws.json')
+AWS.config.update({region: 'us-east-1'})
+
 var parser = new xml2js.Parser({
     trim: true,
     normalize: true,
@@ -62,6 +63,7 @@ function kml2json(kmlString, callback) {
 
 request(nconf.get('RouteBaseUrl') + nconf.get('Route'), function(err,res,body) {
     kml2json(body, function(jsonRoute) {
+
         var s3 = new AWS.S3()
         var s3Options = nconf.get('S3Options')
 
