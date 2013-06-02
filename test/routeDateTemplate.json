@@ -1,0 +1,17 @@
+// Template used to generate dummy data: http://www.json-generator.com/
+//
+[
+    '{{repeat(2)}}',
+    {
+        route: '{{numeric(1,100)}}',
+        description:
+        {
+            vehicle: '{{numeric(1,100)}}',
+            speed: '{{numeric(1.0,100.0)}}',
+            timestamp: '{{date(h:mm:ss)}}',
+            destination: '{{lorem(10)}}',
+            heading: '{{numeric(0,360)}}',
+            coordinates: '{{numeric(0.0,100.0)}},{{numeric(0.0,100.0)}}'
+        }
+    }
+]
