@@ -1,5 +1,5 @@
 // Template used to generate dummy data: http://www.json-generator.com/
-//
+// This is a tentative JSON representation
 [
     '{{repeat(2)}}',
     {
