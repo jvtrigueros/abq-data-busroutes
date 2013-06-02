@@ -7,12 +7,16 @@ var fs = require('fs')
    ,request = require('request')
    ,AWS = require('aws-sdk')
    ,nconf = require('nconf').file({file:__dirname + '/config.json'})
-   ,argv = require('optimist')
-        .demand(['payload'])
-        .argv
 //   ,inspect = require('eyes').inspector({maxLength: false})
 
-fs.readFile(argv.payload, 'ascii', function(err, payload) {
+// I don't like to be forced to use the payload this way! hmpf!
+var payloadIdx = -1
+process.argv.forEach( function(val, idx) {
+    if ( val == '-payload' )
+        payloadIdx = idx + 1
+})
+
+fs.readFile(process.argv[payloadIdx], 'ascii', function(err, payload) {
     var awsKey = JSON.parse(payload)
     AWS.config.update({
         accessKeyId: awsKey.access,
@@ -73,6 +77,7 @@ function kml2json(kmlString, callback) {
 
 request(nconf.get('RouteBaseUrl') + nconf.get('Route'), function(err,res,body) {
     kml2json(body, function(jsonRoute) {
+
         var s3 = new AWS.S3()
         var s3Options = nconf.get('S3Options')
 
