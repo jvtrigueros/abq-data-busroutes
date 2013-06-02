@@ -15,8 +15,8 @@ var parser = new xml2js.Parser({
     explicitArray: false
 })
 
-fs.readFile(__dirname + '/test/allroutes.kml', function(err, data) {
-    parser.parseString(data, function(err, result) {
+function kml2json(kmlString) {
+    parser.parseString(kmlString, function(err, result) {
 //        inspect(result)
         var routes = result.document.placemark
 
@@ -54,6 +54,10 @@ fs.readFile(__dirname + '/test/allroutes.kml', function(err, data) {
             jsonRoute.push(currentRoute)
         })
         console.log(jsonRoute)
-        fs.writeFile('test/allroutes.json',JSON.stringify(jsonRoute))
+        fs.writeFile('test/allroutes.json',JSON.stringify(jsonRoute,null,2))
     })
+}
+
+fs.readFile(__dirname + '/test/allroutes.kml', function(err, kmlString) {
+  kml2json(kmlString)
 })
