@@ -1,0 +1,12 @@
+{
+
+    "RouteBaseUrl": "http://data.cabq.gov/transit/realtime/route/",
+    "Route" : "allroutes.kml",
+    "S3Options":
+    {
+        "ACL": "public-read",
+        "Bucket": "ABQBusRoutes",
+        "ContentType": "text/plain",
+        "Key": "defaultRoute.json"
+    }
+}

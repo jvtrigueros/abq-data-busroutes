@@ -5,8 +5,11 @@ var fs = require('fs')
    ,xml2js = require('xml2js')
    ,http = require('http')
    ,request = require('request')
+   ,AWS = require('aws-sdk')
+   ,nconf = require('nconf').file({file:__dirname + '/config.json'})
 //   ,inspect = require('eyes').inspector({maxLength: false})
 
+AWS.config.loadFromPath('aws.json')
 var parser = new xml2js.Parser({
     trim: true,
     normalize: true,
@@ -57,7 +60,22 @@ function kml2json(kmlString, callback) {
 //  kml2json(kmlString, console.log)
 //})
 
-//request("http://data.cabq.gov/transit/realtime/route/route66.kml", function(err,res,body) {
-request('http://dl.dropboxusercontent.com/u/189610/allroutes.kml', function(err,res,body) {
-    kml2json(body, console.log)
+request(nconf.get('RouteBaseUrl') + nconf.get('Route'), function(err,res,body) {
+    kml2json(body, function(jsonRoute) {
+        var s3 = new AWS.S3()
+        var s3Options = nconf.get('S3Options')
+
+        s3.putObject({
+            ACL: s3Options.ACL,
+            Body: jsonRoute,
+            Bucket: s3Options.Bucket,
+            ContentType: s3Options.ContentType,
+            Key: s3Options.Key
+        },function(err,data){
+            if(err)
+                console.log("Route data could not be save due to: " + err)
+            else
+                console.log("Successfully uploaded route data!")
+        })
+    })
 })
