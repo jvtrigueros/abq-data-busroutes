@@ -30,6 +30,19 @@ function kml2json(kmlString) {
                 }
             }
 
+            route.description.table.tr.forEach( function(tr) {
+                var td = tr.td
+                if(td[0].match(/.*(vehicle).*/i)) {
+                    currentRoute.description['vehicle'] = td[1]
+                } else if(td[0].match(/.*(speed).*/i)) {
+                    currentRoute.description.speed = td[1]
+                } else if(td[0].match(/.*(time).*/i)) {
+                    currentRoute.description.timestamp = td[1]
+                } else if(td[0].match(/.*(stop).*/i)) {
+                    currentRoute.description.destination = td[1]
+                }
+            })
+
             var rawDescription = traverse(route.description.table.tr).reduce( function(acc,node) {
                 if(this.key === 'td') {
                     if(node[0].match(/.*(vehicle).*/i)) {
@@ -46,15 +59,15 @@ function kml2json(kmlString) {
                 return acc
             })
 
-            rawDescription = rawDescription.filter(function(n){ return Object.keys(n).length !== 0 })
-            rawDescription.forEach(function(item) {
-                var key = Object.keys(item)[0]
-                currentRoute.description[key] = item[key]
-            })
+//            rawDescription = rawDescription.filter(function(n){ return Object.keys(n).length !== 0 })
+//            rawDescription.forEach(function(item) {
+//                var key = Object.keys(item)[0]
+//                currentRoute.description[key] = item[key]
+//            })
             jsonRoute.push(currentRoute)
         })
         console.log(jsonRoute)
-        fs.writeFile('test/allroutes.json',JSON.stringify(jsonRoute,null,2))
+//        fs.writeFile('test/allroutes.json',JSON.stringify(jsonRoute,null,2))
     })
 }
 
