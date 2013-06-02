@@ -1,6 +1,6 @@
 {
   "name": "abq-data-busroutes",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "Convert ABQ bus routes that are in KML to JSON format",
   "main": "index.js",
   "directories": {
