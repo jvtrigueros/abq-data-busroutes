@@ -1,0 +1,25 @@
+{
+  "name": "abq-ride-kml2json",
+  "version": "0.0.1",
+  "description": "Convert KML files from ABQ Data to JSON format",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "keywords": [
+    "KML",
+    "JSON",
+    "abq",
+    "bus"
+  ],
+  "author": "Jose V. Trigueros",
+  "license": "MIT",
+  "gitHead": "6fa163b51b86b868de895ce7c6436de04653d87a",
+  "dependencies": {
+    "xml2js": "~0.2.7"
+  }
+}
