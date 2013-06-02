@@ -1,7 +1,7 @@
 {
-  "name": "abq-ride-kml2json",
+  "name": "abq-data-busroutes",
   "version": "0.0.1",
-  "description": "Convert KML files from ABQ Data to JSON format",
+  "description": "Convert ABQ bus routes that are in KML to JSON format",
   "main": "index.js",
   "directories": {
     "doc": "doc"
@@ -21,6 +21,7 @@
   "gitHead": "6fa163b51b86b868de895ce7c6436de04653d87a",
   "dependencies": {
     "xml2js": "~0.2.7",
-    "request": "~2.21.0"
+    "request": "~2.21.0",
+    "aws-sdk": "~1.2.0"
   }
 }

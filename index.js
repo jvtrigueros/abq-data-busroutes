@@ -4,7 +4,7 @@
 var fs = require('fs')
    ,xml2js = require('xml2js')
    ,http = require('http')
-//   ,request = require('request')
+   ,request = require('request')
 //   ,inspect = require('eyes').inspector({maxLength: false})
 
 var localKML = 'test.kml'
@@ -60,11 +60,6 @@ function kml2json(kmlString, callback) {
 //})
 
 //http.get("http://data.cabq.gov/transit/realtime/route/allroutes.kml", function(response) {
-http.get('http://dl.dropboxusercontent.com/u/189610/allroutes.kml', function(response) {
-    var res = response.pipe(fs.createWriteStream(localKML))
-    res.on('close', function() {
-        fs.readFile(__dirname + '/' + localKML, function(err, kmlString) {
-            kml2json(kmlString, console.log)
-        })
-    })
+request('http://dl.dropboxusercontent.com/u/189610/allroutes.kml', function(err,res,body) {
+    kml2json(body, console.log)
 })
