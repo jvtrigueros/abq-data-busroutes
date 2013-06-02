@@ -11,7 +11,7 @@ var fs = require('fs')
 
 // I don't like to be forced to use the payload this way! hmpf!
 var payloadIdx = -1
-process.argv.forEach( function(val, idx, arr) {
+process.argv.forEach( function(val, idx) {
     if ( val == '-payload' )
         payloadIdx = idx + 1
 })
