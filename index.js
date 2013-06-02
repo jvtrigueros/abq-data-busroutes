@@ -1,10 +1,13 @@
 /**
- * User: Jose V. Trigueros
+ * Author: Jose V. Trigueros
  */
 var fs = require('fs')
    ,xml2js = require('xml2js')
+   ,http = require('http')
+//   ,request = require('request')
 //   ,inspect = require('eyes').inspector({maxLength: false})
-   ,traverse = require('traverse')
+
+var localKML = 'test.kml'
 
 var parser = new xml2js.Parser({
     trim: true,
@@ -51,6 +54,17 @@ function kml2json(kmlString, callback) {
     })
 }
 
-fs.readFile(__dirname + '/test/allroutes.kml', function(err, kmlString) {
-  kml2json(kmlString, console.log)
+// TODO: Convert this into a test of some sort
+//fs.readFile(__dirname + '/test/allroutes.kml', function(err, kmlString) {
+//  kml2json(kmlString, console.log)
+//})
+
+//http.get("http://data.cabq.gov/transit/realtime/route/allroutes.kml", function(response) {
+http.get('http://dl.dropboxusercontent.com/u/189610/allroutes.kml', function(response) {
+    var res = response.pipe(fs.createWriteStream(localKML))
+    res.on('close', function() {
+        fs.readFile(__dirname + '/' + localKML, function(err, kmlString) {
+            kml2json(kmlString, console.log)
+        })
+    })
 })
