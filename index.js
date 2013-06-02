@@ -7,9 +7,19 @@ var fs = require('fs')
    ,request = require('request')
    ,AWS = require('aws-sdk')
    ,nconf = require('nconf').file({file:__dirname + '/config.json'})
+   ,argv = require('optimist')
+        .demand(['payload'])
+        .argv
 //   ,inspect = require('eyes').inspector({maxLength: false})
 
-AWS.config.update({region: 'us-east-1'})
+fs.readFile(argv.payload, 'ascii', function(err, payload) {
+    var awsKey = JSON.parse(payload)
+    AWS.config.update({
+        accessKeyId: awsKey.access,
+        secretAccessKey:awsKey.secretaccess,
+        region: awsKey.region
+    })
+})
 
 var parser = new xml2js.Parser({
     trim: true,
@@ -63,7 +73,6 @@ function kml2json(kmlString, callback) {
 
 request(nconf.get('RouteBaseUrl') + nconf.get('Route'), function(err,res,body) {
     kml2json(body, function(jsonRoute) {
-
         var s3 = new AWS.S3()
         var s3Options = nconf.get('S3Options')
 
