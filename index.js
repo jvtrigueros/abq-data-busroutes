@@ -7,8 +7,6 @@ var fs = require('fs')
    ,request = require('request')
 //   ,inspect = require('eyes').inspector({maxLength: false})
 
-var localKML = 'test.kml'
-
 var parser = new xml2js.Parser({
     trim: true,
     normalize: true,
@@ -22,9 +20,9 @@ function kml2json(kmlString, callback) {
     parser.parseString(kmlString, function(err, result) {
 //        inspect(result)
         var routes = result.document.placemark
-
         var jsonRoute = []
-        routes.forEach(function(route){
+        if( routes !== undefined ) {
+            routes.forEach(function(route){
             var currentRoute = {
                 route: route.name,
                 description: {
@@ -33,12 +31,13 @@ function kml2json(kmlString, callback) {
                 }
             }
 
+            // TODO: There is probably a fancier way of doing this mumbo jumbo
             route.description.table.tr.forEach( function(tr) {
                 var td = tr.td
                 if(td[0].match(/.*(vehicle).*/i)) {
                     currentRoute.description['vehicle'] = td[1]
                 } else if(td[0].match(/.*(speed).*/i)) {
-                    currentRoute.description.speed = td[1]
+                    currentRoute.description.speed = td[1].split(' ')[0]
                 } else if(td[0].match(/.*(time).*/i)) {
                     currentRoute.description.timestamp = td[1]
                 } else if(td[0].match(/.*(stop).*/i)) {
@@ -48,6 +47,7 @@ function kml2json(kmlString, callback) {
 
             jsonRoute.push(currentRoute)
         })
+        }
         callback(JSON.stringify(jsonRoute,null,2))
     })
 }
@@ -57,7 +57,7 @@ function kml2json(kmlString, callback) {
 //  kml2json(kmlString, console.log)
 //})
 
-//request("http://data.cabq.gov/transit/realtime/route/allroutes.kml", function(err,res,body) {
+//request("http://data.cabq.gov/transit/realtime/route/route66.kml", function(err,res,body) {
 request('http://dl.dropboxusercontent.com/u/189610/allroutes.kml', function(err,res,body) {
     kml2json(body, console.log)
 })
