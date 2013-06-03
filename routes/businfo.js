@@ -13,10 +13,10 @@ exports.route = function (req, response) {
   }
 
   request(nconf.get('S3BaseUrl') + nconf.get('S3Options:Key'), function(err, res, body) {
+    var routeData = JSON.parse(body)
     if( route === 'all')
-      response.jsonp(body)
+      response.jsonp(routeData)
     else {
-      var routeData = JSON.parse(body)
       response.jsonp( routeData.filter( function(busRoute) {
         return busRoute.route === route
       }))
