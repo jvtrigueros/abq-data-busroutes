@@ -1,5 +1,4 @@
 {
-
     "RouteBaseUrl": "http://data.cabq.gov/transit/realtime/route/",
     "Route" : "allroutes.kml",
     "S3Options":
@@ -8,5 +7,6 @@
         "Bucket": "ABQBusRoutes",
         "ContentType": "text/plain",
         "Key": "defaultRoute.json"
-    }
+    },
+    "S3BaseUrl": "https://s3.amazonaws.com/ABQBusRoutes/"
 }
