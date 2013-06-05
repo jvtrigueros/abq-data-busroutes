@@ -1,7 +1,12 @@
 /**
  * Module dependencies.
  */
-
+if(process.env.NODETIME_ACCOUNT_KEY) {
+  require('nodetime').profile({
+    accountKey: process.env.NODETIME_ACCOUNT_KEY,
+    appName: 'ABQ Bus Route Information' // optional
+  });
+}
 var express = require('express')
   , businfo = require('./routes/businfo')
   , http = require('http')
