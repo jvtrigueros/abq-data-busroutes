@@ -34,11 +34,9 @@ var parser = new xml2js.Parser({
     explicitArray: false
 })
 
-var s3 = new AWS.S3()
 var s3Options = nconf.get('S3Options')
 var s3PutObject = {
   ACL: s3Options.ACL,
-  Body: jsonRoute,
   Bucket: s3Options.Bucket,
   ContentType: s3Options.ContentType
 }
@@ -78,7 +76,10 @@ function kml2json(kmlString, callback) {
         callback(JSON.stringify(jsonRoute, null, 2))
       } catch (e) {
         console.log(e)
-        s3PutObject.Key = ''
+        var s3 = new AWS.S3()
+        s3PutObject.Key = 'error_'+ Date.now() +'.xml'
+        s3PutObject.Body = kmlString
+        s3.putObject(s3PutObject)
         callback({error: e})
       }
     })
@@ -91,7 +92,9 @@ function kml2json(kmlString, callback) {
 
 request(nconf.get('RouteBaseUrl') + nconf.get('Route'), function(err,res,body) {
     kml2json(body, function(jsonRoute) {
+        var s3 = new AWS.S3()
         s3PutObject.Key = s3Options.Key
+        s3PutObject.Body = jsonRoute
         s3.putObject(s3PutObject,function(err,data){
             if(err)
                 console.log("Route data could not be save due to: " + err)
