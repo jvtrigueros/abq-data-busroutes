@@ -94,11 +94,11 @@ function kml2json(kmlString, callback) {
 }
 
 // TODO: Convert this into a test of some sort
-fs.readFile(__dirname + '/test/allroutes.kml', function(err, kmlString) {
-  kml2json(kmlString, console.log)
-})
+//fs.readFile(__dirname + '/test/allroutes.kml', function(err, kmlString) {
+//  kml2json(kmlString, console.log)
+//})
 
-/*
+
 request(nconf.get('RouteBaseUrl') + nconf.get('Route'), function(err,res,body) {
     kml2json(body, function(jsonRoute) {
         var s3 = new AWS.S3()
@@ -111,4 +111,4 @@ request(nconf.get('RouteBaseUrl') + nconf.get('Route'), function(err,res,body) {
                 console.log("Successfully uploaded route data!")
         })
     })
-})*/
+})
