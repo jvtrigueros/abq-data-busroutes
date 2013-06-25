@@ -18,7 +18,7 @@ exports.route = function (req, response) {
       response.jsonp(routeData)
     else {
       response.jsonp( routeData.filter( function(busRoute) {
-        return busRoute.route === route
+        return busRoute.features.properties.route === route
       }))
     }
   })
