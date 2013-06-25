@@ -50,30 +50,38 @@ function kml2json(kmlString, callback) {
         if (routes !== undefined) {
           routes.forEach(function (route) {
             var currentRoute = {
-              route      : route.name,
-              description: {
-                coordinates: route.point.coordinates,
+              type : 'Feature',
+              properties: {
+                route      : route.name,
                 heading    : route.style.iconstyle.heading
+              },
+              geometry : {
+                type : 'Point',
+                coordinates: route.point.coordinates.split(',')
               }
             }
             // TODO: There is probably a fancier way of doing this mumbo jumbo
             route.description.table.tr.forEach(function (tr) {
               var td = tr.td
+              var routeProperties = currentRoute.properties
               if (td[0].match(/.*(vehicle).*/i)) {
-                currentRoute.description['vehicle'] = td[1]
+                routeProperties.vehicle = td[1]
               } else if (td[0].match(/.*(speed).*/i)) {
-                currentRoute.description.speed = td[1].split(' ')[0]
+                routeProperties.speed = td[1].split(' ')[0]
               } else if (td[0].match(/.*(time).*/i)) {
-                currentRoute.description.timestamp = td[1]
+                routeProperties.timestamp = td[1]
               } else if (td[0].match(/.*(stop).*/i)) {
-                currentRoute.description.destination = td[1]
+                routeProperties.destination = td[1]
               }
             })
 
             jsonRoute.push(currentRoute)
           })
         }
-        callback(JSON.stringify(jsonRoute, null, 2))
+        callback(JSON.stringify({
+          type : "FeatureCollection",
+          features : jsonRoute
+        }, null, 2))
       } catch (e) {
         console.log(e)
         var s3 = new AWS.S3()
@@ -86,10 +94,11 @@ function kml2json(kmlString, callback) {
 }
 
 // TODO: Convert this into a test of some sort
-//fs.readFile(__dirname + '/test/allroutes.kml', function(err, kmlString) {
-//  kml2json(kmlString, console.log)
-//})
+fs.readFile(__dirname + '/test/allroutes.kml', function(err, kmlString) {
+  kml2json(kmlString, console.log)
+})
 
+/*
 request(nconf.get('RouteBaseUrl') + nconf.get('Route'), function(err,res,body) {
     kml2json(body, function(jsonRoute) {
         var s3 = new AWS.S3()
@@ -102,4 +111,4 @@ request(nconf.get('RouteBaseUrl') + nconf.get('Route'), function(err,res,body) {
                 console.log("Successfully uploaded route data!")
         })
     })
-})
+})*/
