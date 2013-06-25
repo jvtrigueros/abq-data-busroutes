@@ -1,0 +1,202 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "route": "157",
+        "heading": "181",
+        "vehicle": "731",
+        "speed": "0.0",
+        "timestamp": "9:47:22 PM",
+        "destination": "Louisiana @ Zuni scheduled at 9:49 PM"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-106.5687",
+          "35.07512"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "route": "155",
+        "heading": "227",
+        "vehicle": "711",
+        "speed": "46.0",
+        "timestamp": "9:47:15 PM",
+        "destination": "Coors @ Western Trails scheduled at 9:45 PM"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-106.6994",
+          "35.14035"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "route": "157",
+        "heading": "303",
+        "vehicle": "743",
+        "speed": "41.0",
+        "timestamp": "9:47:16 PM",
+        "destination": "Monta�o @ Culture Dr. scheduled at 9:48 PM"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-106.6113",
+          "35.1339"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "route": "66",
+        "heading": "275",
+        "vehicle": "702",
+        "speed": "23.0",
+        "timestamp": "9:47:21 PM",
+        "destination": "Central @ Britt scheduled at 9:45 PM"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-106.5253",
+          "35.07128"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "route": "66",
+        "heading": "138",
+        "vehicle": "713",
+        "speed": "0.0",
+        "timestamp": "9:10:19 PM",
+        "destination": "Central @ Sunset scheduled at 7:15 PM"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-106.7334",
+          "35.08899"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "route": "66",
+        "heading": "96",
+        "vehicle": "751",
+        "speed": "0.0",
+        "timestamp": "9:47:22 PM",
+        "destination": "Central @ Alcazar scheduled at 9:40 PM"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-106.5689",
+          "35.07579"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "route": "198",
+        "heading": "77",
+        "vehicle": "701",
+        "speed": "39.1",
+        "timestamp": "9:47:20 PM",
+        "destination": "CUTC Bay A scheduled at 9:51 PM"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-106.7299",
+          "35.07537"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "route": "66",
+        "heading": "98",
+        "vehicle": "754",
+        "speed": "0.0",
+        "timestamp": "9:47:27 PM",
+        "destination": "1st @ Central (in front of A.T.C.) scheduled at 9:46 PM"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-106.6535",
+          "35.08366"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "route": "66",
+        "heading": "356",
+        "vehicle": "718",
+        "speed": "0.0",
+        "timestamp": "9:47:21 PM"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-106.7252",
+          "35.0785"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "route": "66",
+        "heading": "300",
+        "vehicle": "747",
+        "speed": "7.5",
+        "timestamp": "9:47:25 PM",
+        "destination": "Copper @ 6th scheduled at 9:45 PM"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-106.6488",
+          "35.08525"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "route": "2",
+        "heading": "133",
+        "vehicle": "756",
+        "speed": "0.0",
+        "timestamp": "9:47:24 PM",
+        "destination": "Academy @ Concordia scheduled at 6:29 PM"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-106.7333",
+          "35.0891"
+        ]
+      }
+    }
+  ]
+}
