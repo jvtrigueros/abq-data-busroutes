@@ -17,7 +17,7 @@ exports.route = function (req, response) {
     if( route === 'all')
       response.jsonp(wrapFeatureCollection(routeData))
     else {
-      response.jsonp( wrapFeatureCollection(routeData.features.filter( function(busRoute) {
+      response.jsonp( wrapFeatureCollection(routeData.filter( function(busRoute) {
         return busRoute.properties.route === route
       })) )
     }
