@@ -15,11 +15,18 @@ exports.route = function (req, response) {
   request(nconf.get('S3BaseUrl') + nconf.get('S3Options:Key'), function(err, res, body) {
     var routeData = JSON.parse(body)
     if( route === 'all')
-      response.jsonp(routeData)
+      response.jsonp(wrapFeatureCollection(routeData))
     else {
-      response.jsonp( routeData.features.filter( function(busRoute) {
+      response.jsonp( wrapFeatureCollection(routeData.features.filter( function(busRoute) {
         return busRoute.properties.route === route
-      }))
+      })) )
     }
   })
+}
+
+function wrapFeatureCollection(features) {
+  return {
+    type: 'FeatureCollection',
+    features: features
+  }
 }
